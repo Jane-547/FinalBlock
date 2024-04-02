@@ -15,4 +15,50 @@ public abstract class Animal implements Serializable, HouseItem {
     private LocalDate birthdate;
     private List<Animal> commands;
 
+    public Animal(String name, LocalDate birthdate) {
+        this.name = name;
+        this.birthdate = birthdate;
+        this.type = "Животное";
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public LocalDate getBirthdate() {
+        return birthdate;
+    }
+
+    public List<Animal> getCommands() {
+        return commands;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setBirthdate(LocalDate birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    public void setCommands(List<Animal> commands) {
+        this.commands = commands;
+    }
 }
+
