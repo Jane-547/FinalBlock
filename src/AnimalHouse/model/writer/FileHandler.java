@@ -1,5 +1,7 @@
 package AnimalHouse.model.writer;
 
+import AnimalHouse.model.house.House;
+
 import java.io.*;
 
 public class FIleHandler implements Writable {
@@ -34,8 +36,8 @@ public class FIleHandler implements Writable {
         try (FileInputStream fis = new FileInputStream(file)){
             if (fis != null) {
                 ois = new ObjectInputStream(fis);
-                FamilyTree readFamily = (FamilyTree) ois.readObject();
-                return readFamily;
+                House readHouse = (House) ois.readObject();
+                return readHouse;
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);

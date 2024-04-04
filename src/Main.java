@@ -1,3 +1,4 @@
+import AnimalHouse.model.writer.FIleHandler;
 import AnimalHouse.view.ConsoleUI;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
@@ -9,6 +10,5 @@ public class Main {
         test.setWritable(new FIleHandler());
         test.start();
 
-    }
     }
 }

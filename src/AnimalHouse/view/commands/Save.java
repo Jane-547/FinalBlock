@@ -1,5 +1,7 @@
 package AnimalHouse.view.commands;
 
+import AnimalHouse.view.ConsoleUI;
+
 public class Save extends Command {
 
     public Save(ConsoleUI consoleUI) {

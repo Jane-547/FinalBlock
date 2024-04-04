@@ -1,6 +1,7 @@
 package AnimalHouse.view;
 
 import AnimalHouse.model.writer.Writable;
+import AnimalHouse.presenter.Presenter;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -66,8 +67,8 @@ public class ConsoleUI implements View {
         presenter.allTree();
     }
 
-    public void addNewHuman() {
-        System.out.println("Введите фамилию: ");
+    public void addAnimal() {
+        System.out.println("Выберите пункт: ");
         String lastname = scanner.nextLine();
         System.out.println("Введите имя: ");
         String name = scanner.nextLine();
