@@ -67,8 +67,7 @@ public class ConsoleUI implements View {
 
     public void addAnimal() {
         System.out.println("Какое животное Вы хотите создать? \n 1 - Кот \n 2 - Собака \n 3 - Хомяк \n 4 - Верблюд \n 5 - Осел \n 6 - Лошадь \n Введите число: ");
-        int type = scanner.nextInt();
-        scanner.nextLine();
+        int type = checkAnimalType();
         System.out.println("Введите имя: ");
         String name = scanner.nextLine();
         System.out.println("Введите год рождения");
@@ -97,6 +96,21 @@ public class ConsoleUI implements View {
                 i = false;
             } else {
                 System.out.println("Неверное значение! Введите целое число.");
+            }
+        }
+        return value;
+    }
+
+    private int checkAnimalType() {
+        int value = 0;
+        boolean i = true;
+        while (i) {
+            String text = scanner.nextLine();
+            if (text.matches("[0-6]+")) {
+                value = Integer.parseInt(text);
+                i = false;
+            } else {
+                System.out.println("Неверное значение! Введите число от 1 до 6.");
             }
         }
         return value;
