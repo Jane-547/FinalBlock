@@ -4,21 +4,26 @@ import AnimalHouse.model.house.HouseItem;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public abstract class Animal implements Serializable, HouseItem {
 
     private int id;
     private String name;
-    private String type;
+    public String type;
     private LocalDate birthdate;
-    private List<Animal> commands;
+    public List<String> commands;
 
     public Animal(String name, LocalDate birthdate) {
         this.name = name;
         this.birthdate = birthdate;
         this.type = "Животное";
+        this.commands = new ArrayList<>();
+    }
+
+    public void newCommand(String command) {
+        this.commands.add(command);
     }
 
     public int getId() {
@@ -37,8 +42,13 @@ public abstract class Animal implements Serializable, HouseItem {
         return birthdate;
     }
 
-    public List<Animal> getCommands() {
-        return commands;
+    public String getCommands() {
+        if (!(this.commands).isEmpty()) {
+            StringBuilder stringBuilder = new StringBuilder("Команды: ");
+            stringBuilder.append(this.commands);
+            return stringBuilder.toString();
+        }
+        return null;
     }
 
     public void setId(int id) {
@@ -57,8 +67,14 @@ public abstract class Animal implements Serializable, HouseItem {
         this.birthdate = birthdate;
     }
 
-    public void setCommands(List<Animal> commands) {
-        this.commands = commands;
+
+    public void addCommand(String command) {
+        this.commands.add(command);
+    }
+
+    @Override
+    public String toString() {
+        return "ID:" + id + " кличка: " + name + ", дата рождения: " + birthdate;
     }
 }
 

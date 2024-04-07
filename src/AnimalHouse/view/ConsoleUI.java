@@ -4,6 +4,7 @@ import AnimalHouse.model.writer.Writable;
 import AnimalHouse.presenter.Presenter;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class ConsoleUI implements View {
@@ -22,17 +23,17 @@ public class ConsoleUI implements View {
     @Override
     public void start() {
         hello();
-        while(work) {
+        while (work) {
             printMenu();
             choice();
         }
     }
 
-    private void hello () {
+    private void hello() {
         System.out.println("Добро пожаловать!");
     }
 
-    private void choice () {
+    private void choice() {
         String value = scanner.nextLine();
         if (checkMenu(value)) {
             int num = Integer.parseInt(value);
@@ -63,53 +64,27 @@ public class ConsoleUI implements View {
         }
     }
 
-    public void viewAll() {
-        presenter.allTree();
-    }
 
     public void addAnimal() {
-        System.out.println("Выберите пункт: ");
-        String lastname = scanner.nextLine();
+        System.out.println("Какое животное Вы хотите создать? \n 1 - Кот \n 2 - Собака \n 3 - Хомяк \n 4 - Верблюд \n 5 - Осел \n 6 - Лошадь \n Введите число: ");
+        int type = scanner.nextInt();
+        scanner.nextLine();
         System.out.println("Введите имя: ");
         String name = scanner.nextLine();
-        System.out.println("Введите пол (Male, Female): ");
-        Gender gender = checkGender();
-        try {
-            presenter.addBody(lastname, name, gender);
-        } catch (HumanExcistsException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    private Gender checkGender() {
-        String answer = null;
-        boolean i = true;
-        while (i) {
-            answer = scanner.nextLine();
-            if (answer.equals("Male") || answer.equals("Female")) {
-                i = false;
-            }
-            else System.out.println("Неверное значение! Попробуйте еще раз.");
-        }
-        return Gender.valueOf(answer);
-    }
-
-    public void addBirthdate() {
-        System.out.println("Введите Id");
-        int id = checkId();
         System.out.println("Введите год рождения");
         int year = checkInt();
         System.out.println("Введите месяц рождения");
         int month = checkInt();
         System.out.println("Введите день рождения");
         int day = checkInt();
-        if (presenter.setBirthday(id, year, month, day)) {
-            success();
-        }
-        else {
+        LocalDate birthdate = null;
+        if (presenter.dateIsValid(year, month, day)) {
+            birthdate = presenter.setBirthDate(year, month, day);
+        } else {
             System.out.println("Дата указана неверно!");
             error();
         }
+        presenter.addAnimal(type, name, birthdate);
     }
 
     private int checkInt() {
@@ -117,7 +92,7 @@ public class ConsoleUI implements View {
         boolean i = true;
         while (i) {
             String text = scanner.nextLine();
-            if (text.matches("[0-9]+")){
+            if (text.matches("[0-9]+")) {
                 value = Integer.parseInt(text);
                 i = false;
             } else {
@@ -135,73 +110,18 @@ public class ConsoleUI implements View {
             if (presenter.checkId(id)) {
                 i = false;
                 return id;
-            }
-            else System.out.println("Человек с таким Id не найден. Введите другое значение.");
+            } else System.out.println("Животное с таким Id не найдено. Введите другое значение.");
         }
         return id;
     }
 
-    public void addDeathdate() {
-        System.out.println("Введите Id");
-        int id = checkId();
-        System.out.println("Введите год смерти");
-        int year = checkInt();
-        System.out.println("Введите месяц смерти");
-        int month = checkInt();
-        System.out.println("Введите день смерти");
-        int day = checkInt();
-        if (presenter.setDeathdate(id, year, month, day)) {
-            success();
-        }
-        else {
-            error();
-        }
-    }
 
-    public void infoById() {
-        System.out.println("Введите ID: ");
-        int id = checkId();
-        presenter.getBodyInfoById(id);
-    }
-
-    public void addSpouse() {
-        System.out.println("Введите ID одного из супругов: ");
-        int one = checkId();
-        System.out.println("Введите ID второго супруга: ");
-        int two = checkId();
-        if (one == two) {
-            System.out.println("Id одинаковы. Данные не добавлены.");
-        }
-        else {
-            presenter.addSpouse(one, two);
-        }
-    }
-
-    public void addChild() {
-        System.out.println("Введите ID родителя: ");
-        int parentId = checkId();
-        System.out.println("Введите ID ребенка: ");
-        int childId = checkId();
-        if (parentId == childId) {
-            System.out.println("Id одинаковы. Данные не добавлены.");
-        }
-        else {
-            presenter.addChild(parentId, childId);
-        }
-    }
-
-
-    public void sortAge() {
-        presenter.sortByAge();
-    }
-
-    private boolean checkMenu (String text) {
+    private boolean checkMenu(String text) {
         try {
             if (Integer.parseInt(text) > 0 && Integer.parseInt(text) <= menu.getSize()) {
                 return true;
             }
-        }
-        catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             System.out.println(e.getMessage());
         }
         System.out.println("Вы ввели неверное значение!");
@@ -211,8 +131,7 @@ public class ConsoleUI implements View {
     public void save() {
         if (presenter.save()) {
             success();
-        }
-        else {
+        } else {
             error();
         }
     }
@@ -225,9 +144,31 @@ public class ConsoleUI implements View {
         System.out.println("Данные не записаны!");
     }
 
+
+    public void viewCommands() {
+        System.out.println("Введите ID: ");
+        int id = checkId();
+        presenter.viewCommands(id);
+    }
+
+    public void counter() {
+        System.out.println("Всего создано животных: " + Integer.toString(presenter.counter()));
+    }
+
+    public void addCommand() {
+        System.out.println("Введите ID животного: ");
+        int animalId = checkId();
+        System.out.println("Введите команду: ");
+        String command = scanner.nextLine();
+        presenter.addCommand(animalId, command);
+    }
+
+    public void sortBirthDate() {
+        presenter.sortBirthDate();
+    }
+
     @Override
     public void printAnswer(String answer) {
         System.out.println(answer);
     }
-
 }

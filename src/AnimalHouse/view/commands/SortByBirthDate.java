@@ -1,4 +1,15 @@
 package AnimalHouse.view.commands;
 
-public class SortByBirthDate {
+import AnimalHouse.view.ConsoleUI;
+
+public class SortByBirthDate extends Command {
+
+    public SortByBirthDate(ConsoleUI consoleUI) {
+        super(consoleUI);
+        description = "Отсортировать по дате рождения";
+    }
+
+    public void execute(){
+        consoleUI.sortBirthDate();
+    }
 }
