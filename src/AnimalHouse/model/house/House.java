@@ -64,4 +64,9 @@ public class House<E extends HouseItem> implements Serializable, Iterable<E> {
         }
         return stringBuilder.toString();
     }
+
+    public void deleteAnimal(int id) {
+        E animal = findInHouse(id);
+        animalsInHouse.remove(animal);
+    }
 }

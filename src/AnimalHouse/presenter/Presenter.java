@@ -66,4 +66,8 @@ public class Presenter {
         service.sortBirthDate();
         view.printAnswer(service.getAnimals());
     }
+
+    public boolean deleteAnimal(int id) {
+        return service.deleteAnimal(id);
+    }
 }

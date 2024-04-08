@@ -185,4 +185,15 @@ public class ConsoleUI implements View {
     public void printAnswer(String answer) {
         System.out.println(answer);
     }
+
+    public void deleteAnimal() {
+        System.out.println("Введите ID животного: ");
+        int animalId = checkId();
+        if (presenter.deleteAnimal(animalId)) {
+            success();
+        }
+        else {
+            error();
+        }
+    }
 }

@@ -80,4 +80,13 @@ public class Service {
     public String getAnimals() {
         return house.getAnimals();
     }
+
+    public boolean deleteAnimal(int id) {
+        Animal animal = (Animal) house.findInHouse(id);
+        if (animal != null) {
+            house.deleteAnimal(id);
+            return true;
+        }
+        return false;
+    }
 }
