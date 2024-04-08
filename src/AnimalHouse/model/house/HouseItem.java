@@ -1,7 +1,5 @@
 package AnimalHouse.model.house;
 
-
-
 import java.time.LocalDate;
 
 public interface HouseItem {
@@ -15,4 +13,6 @@ public interface HouseItem {
     String getName();
 
     String getCommands();
+
+    String getType();
 }

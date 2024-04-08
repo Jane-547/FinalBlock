@@ -36,17 +36,13 @@ public class House<E extends HouseItem> implements Serializable, Iterable<E> {
         return null;
     }
 
-    @Override
-    public Iterator<E> iterator() {
-        return new AnimalIterator<>(animalsInHouse);
-    }
-
     public String commandsById(int id) {
         StringBuilder sb = new StringBuilder("Id - ");
         sb.append(id).append("\n").append("\n");
         E animal = findInHouse(id);
         if (animal != null) {
             sb.append("Кличка: ").append(animal.getName() + "\n");
+            sb.append("Тип: ").append(animal.getType() + "\n");
             sb.append(animal.getCommands() + "\n");
             return sb.toString();
         }
@@ -70,4 +66,10 @@ public class House<E extends HouseItem> implements Serializable, Iterable<E> {
         animalsInHouse.remove(animal);
         counter--;
     }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new AnimalIterator<>(animalsInHouse);
+    }
+
 }

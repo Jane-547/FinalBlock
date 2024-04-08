@@ -22,10 +22,6 @@ public abstract class Animal implements Serializable, HouseItem {
         this.commands = new ArrayList<>();
     }
 
-    public void newCommand(String command) {
-        this.commands.add(command);
-    }
-
     public int getId() {
         return id;
     }
@@ -77,4 +73,3 @@ public abstract class Animal implements Serializable, HouseItem {
         return "ID:" + id + ", тип: " + type + ", кличка: " + name + ", дата рождения: " + birthdate + "\n";
     }
 }
-

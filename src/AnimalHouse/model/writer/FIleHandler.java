@@ -1,6 +1,5 @@
 package AnimalHouse.model.writer;
 
-
 import AnimalHouse.model.house.House;
 
 import java.io.*;

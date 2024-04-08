@@ -1,7 +1,5 @@
 package AnimalHouse.model.animals.packAnimals;
 
-import AnimalHouse.model.animals.pets.Pets;
-
 import java.time.LocalDate;
 
 public class Horse extends PackAnimals {

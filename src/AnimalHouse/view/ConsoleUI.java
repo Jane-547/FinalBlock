@@ -20,15 +20,6 @@ public class ConsoleUI implements View {
         menu = new MainMenu(this);
     }
 
-    @Override
-    public void start() {
-        hello();
-        while (work) {
-            printMenu();
-            choice();
-        }
-    }
-
     private void hello() {
         System.out.println("Добро пожаловать!");
     }
@@ -63,7 +54,6 @@ public class ConsoleUI implements View {
             System.out.println(e.getMessage());
         }
     }
-
 
     public void addAnimal() {
         System.out.println("Какое животное Вы хотите создать? \n 1 - Кот \n 2 - Собака \n 3 - Хомяк \n 4 - Верблюд \n 5 - Осел \n 6 - Лошадь \n Введите число: ");
@@ -129,7 +119,6 @@ public class ConsoleUI implements View {
         return id;
     }
 
-
     private boolean checkMenu(String text) {
         try {
             if (Integer.parseInt(text) > 0 && Integer.parseInt(text) <= menu.getSize()) {
@@ -181,11 +170,6 @@ public class ConsoleUI implements View {
         presenter.sortBirthDate();
     }
 
-    @Override
-    public void printAnswer(String answer) {
-        System.out.println(answer);
-    }
-
     public void deleteAnimal() {
         System.out.println("Введите ID животного: ");
         int animalId = checkId();
@@ -195,5 +179,19 @@ public class ConsoleUI implements View {
         else {
             error();
         }
+    }
+
+    @Override
+    public void start() {
+        hello();
+        while (work) {
+            printMenu();
+            choice();
+        }
+    }
+
+    @Override
+    public void printAnswer(String answer) {
+        System.out.println(answer);
     }
 }
