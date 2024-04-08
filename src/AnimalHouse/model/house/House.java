@@ -47,7 +47,7 @@ public class House<E extends HouseItem> implements Serializable, Iterable<E> {
         E animal = findInHouse(id);
         if (animal != null) {
             sb.append("Кличка: ").append(animal.getName() + "\n");
-            sb.append("Команды: ").append(animal.getCommands() + "\n");
+            sb.append(animal.getCommands() + "\n");
             return sb.toString();
         }
         return "Данных нет.";
@@ -68,5 +68,6 @@ public class House<E extends HouseItem> implements Serializable, Iterable<E> {
     public void deleteAnimal(int id) {
         E animal = findInHouse(id);
         animalsInHouse.remove(animal);
+        counter--;
     }
 }
