@@ -17,6 +17,7 @@ public class MainMenu {
         commandList.add(new LearnNewCommand(consoleUI));
         commandList.add(new Counter(consoleUI));
         commandList.add(new SortByBirthDate(consoleUI));
+        commandList.add(new DeleteAnimal(consoleUI));
         commandList.add(new Save(consoleUI));
         commandList.add(new Finish(consoleUI));
     }

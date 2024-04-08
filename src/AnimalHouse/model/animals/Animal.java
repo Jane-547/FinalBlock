@@ -74,7 +74,7 @@ public abstract class Animal implements Serializable, HouseItem {
 
     @Override
     public String toString() {
-        return "ID:" + id + ", тип: " + type + " кличка: " + name + ", дата рождения: " + birthdate;
+        return "ID:" + id + ", тип: " + type + ", кличка: " + name + ", дата рождения: " + birthdate + "\n";
     }
 }
 
